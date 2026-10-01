@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>بازی حدس عدد</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        text-align: center;
+        padding-top: 100px;
+        color: white;
+    }
+
+    .game {
+        background: white;
+        color: #222;
+        width: 350px;
+        margin: auto;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    input {
+        padding: 12px;
+        width: 120px;
+        font-size: 18px;
+        border: 2px solid #667eea;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    button {
+        padding: 12px 20px;
+        font-size: 16px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #5568d8;
+    }
+
+    #result {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+<div class="game"></div>
+    <h1>🎮 بازی حدس عدد</h1>
+
+    <p>یک عدد بین 1 تا 100 حدس بزن!</p>
+
+    <input type="number" id="guess">
+
+    <button onclick="guessNumber()">حدس بزن</button>
+
+    <p id="result"></p>
+    <p id="attempts">تعداد حدس‌ها: 0</p>
+    <button id="restart" onclick="restartGame()" style="display: none;">🔄 بازی دوباره</button>
+    </div>
+    <script>
+        let secret = Math.floor(Math.random() * 100) + 1;
+let attempts = 0;
+        function guessNumber() {
+    let guess = Number(document.getElementById("guess").value);
+    let result = document.getElementById("result");
+    let restart = document.getElementById("restart");
+    attempts++;
+document.getElementById("attempts").innerText = "تعداد حدس‌ها: " + attempts;
+
+    if (guess < secret) {
+        result.innerText = "⬆️ بیشتر حدس بزن!";
+    }
+    else if (guess > secret) {
+        result.innerText = "⬇️ کمتر حدس بزن!";
+    }
+    else {
+        result.innerText = "🎉 آفرین! درست حدس زدی!";
+        restart.style.display = "inline-block";
+    }
+}
+
+function restartGame() {
+    secret = Math.floor(Math.random() * 100) + 1;
+
+    document.getElementById("guess").value = "";
+    document.getElementById("result").innerText = "";
+attempts = 0;
+document.getElementById("attempts").innerText = "تعداد حدس‌ها: 0";
+    document.getElementById("restart").style.display = "none";
+}
+            
+        
+    
+    </script>
+
+</body>
+</html>
